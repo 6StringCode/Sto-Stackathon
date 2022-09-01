@@ -4,16 +4,20 @@ const axios = require('axios');
 
 
 const Stay = db.define('stay', {
-  city: {
-    type: Sequelize.STRING,
-    allowNull: false
+  companyHousing: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
   },
-  hotel: {
-    type: Sequelize.STRING,
+  kitchen: {
+    type: Sequelize.BOOLEAN,
   },
-  date: {
-    type: Sequelize.RANGE(Sequelize.DATEONLY),
-  }
+  microwave: {
+    type: Sequelize.BOOLEAN,
+  },
+  Bed: {
+    type: Sequelize.ENUM('KING', 'QUEEN', 'TWIN-DOUBLE')
+  },
 });
 
 module.exports = Stay
