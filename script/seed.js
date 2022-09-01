@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Member} } = require('../server/db')
+const {db, models: {User, } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,18 +12,18 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'erik', password: '123' }),
-    User.create({ username: 'adam', password: 'scr33ch' }),
+    User.create({ firstName: 'Erik', lastName: 'Birkeland', username: 'erik', password: 'scr33ch' }),
+    User.create({ firstName: 'Adam', lastName: 'Stoler', username: 'adam', password: 'scr33ch' }),
   ])
   
   const members = await Promise.all([
-    Member.create({ firstName: 'Steven', lastName: 'Tyler' }),
-    Member.create({ firstName: 'Joe', lastName: 'Perry' }),
-    Member.create({ firstName: 'Geddy', lastName: 'Lee' }),
-    Member.create({ firstName: 'Steve', lastName: 'Jordan' }),
-    Member.create({ firstName: 'Perry', lastName: 'Farrell' }),
-    Member.create({ firstName: 'Dave', lastName: 'Navarro' }),
-    Member.create({ firstName: 'David Lee', lastName: 'Roth' }),
+    User.create({ firstName: 'Steven', lastName: 'Tyler' }),
+    User.create({ firstName: 'Joe', lastName: 'Perry' }),
+    User.create({ firstName: 'Geddy', lastName: 'Lee' }),
+    User.create({ firstName: 'Steve', lastName: 'Jordan' }),
+    User.create({ firstName: 'Perry', lastName: 'Farrell' }),
+    User.create({ firstName: 'Dave', lastName: 'Navarro' }),
+    User.create({ firstName: 'David Lee', lastName: 'Roth' }),
   ])
 
   console.log(`seeded ${users.length} users`)

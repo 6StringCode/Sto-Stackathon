@@ -18,13 +18,13 @@ const User = db.define('user', {
     allowNull: false
   },
   fullName: {
-    type: DataTypes.VIRTUAL,
+    type: Sequelize.VIRTUAL,
     get() {
       return `${this.firstName} ${this.lastName}`;
     }
   },
   isAdmin: {
-    type: BOOLEAN,
+    type: Sequelize.BOOLEAN,
     defaultValue: false
   },
   username: {
