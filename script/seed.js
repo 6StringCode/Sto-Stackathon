@@ -54,7 +54,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users, ${trips.length} trips`)
   console.log(`seeded successfully`)
-  console.log(stays)
+  console.log(users.map(user => user.fullName))
   return {
     users: {
       erik: users[0],
