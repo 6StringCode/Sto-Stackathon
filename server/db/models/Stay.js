@@ -9,14 +9,8 @@ const Stay = db.define('stay', {
     allowNull: false,
     defaultValue: true
   },
-  kitchen: {
-    type: Sequelize.BOOLEAN,
-  },
-  microwave: {
-    type: Sequelize.BOOLEAN,
-  },
-  Bed: {
-    type: Sequelize.ENUM('KING', 'QUEEN', 'TWIN-DOUBLE')
+  amenity: {
+    type: Sequelize.ENUM('KITCHENETTE', 'KITCHEN', 'MICROWAVE')
   },
 });
 

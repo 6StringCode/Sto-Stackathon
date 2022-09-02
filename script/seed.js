@@ -33,19 +33,28 @@ async function seed() {
   
   //creating stays
   const stays = await Promise.all([
-    Stay.create({ companyHousing: 1, microwave: 1 }),
-    Stay.create({ companyHousing: 1, microwave: 1 }),
-    Stay.create({ companyHousing: 1, microwave: 1 }),
-    Stay.create({ companyHousing: 1, kitchen: 1 }),
-    Stay.create({ companyHousing: 1, kitchen: 1 }),
-    Stay.create({ companyHousing: 1, kitchen: 1 }),
-    Stay.create({ companyHousing: 1, kitchen: 1 }),
-    Stay.create({ companyHousing: 1, kitchen: 1 }),
+    Stay.create({ companyHousing: 1, amenity: 'KITCHEN' }),
+    Stay.create({ companyHousing: 1, amenity: 'KITCHEN' }),
+    Stay.create({ companyHousing: 1, amenity: 'KITCHEN' }),
+    Stay.create({ companyHousing: 1, amenity: 'KITCHEN' }),
+    Stay.create({ companyHousing: 1, amenity: 'KITCHEN' }),
+    Stay.create({ companyHousing: 1, amenity: 'MICROWAVE' }),
+    Stay.create({ companyHousing: 1, amenity: 'MICROWAVE' }),
+    Stay.create({ companyHousing: 1, amenity: 'MICROWAVE' }),
+  ]);
+
+  stays[0].userId = users[1].id;
+  stays[0].tripId = trips[2].id;
+  stays[5].userId = users[2].id;
+  stays[5].tripId = trips[2].id;
+  await Promise.all([
+    stays[0].save(),
+    stays[5].save()
   ]);
 
   console.log(`seeded ${users.length} users, ${trips.length} trips`)
   console.log(`seeded successfully`)
-  console.log(trips)
+  console.log(stays)
   return {
     users: {
       erik: users[0],

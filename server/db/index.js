@@ -7,9 +7,10 @@ const Stay = require('./models/Stay');
 
 //associations could go here!
 
-Trip.hasMany(Stay); //places tripId on Stay
-User.belongsTo(Trip); //places tripId on User
-Stay.hasMany(User); //places stayId on User
+Stay.belongsTo(Trip); //places tripId on Stay
+Stay.belongsTo(User); //places stayId on Stay
+Trip.hasMany(Stay);
+User.hasMany(Stay);
 
 
 module.exports = {
