@@ -11,9 +11,18 @@ const Trip = db.define('trip', {
   hotel: {
     type: Sequelize.STRING,
   },
-  date: {
-    type: Sequelize.RANGE(Sequelize.DATEONLY),
-  }
+  checkIn: {
+    type: Sequelize.DATEONLY
+  },
+  checkOut: {
+    type: Sequelize.DATEONLY
+  },
 });
 
 module.exports = Trip
+
+
+// date range in one property - overcomplicated
+//   dates: {
+//     type: Sequelize.RANGE(Sequelize.DATEONLY),
+//   }

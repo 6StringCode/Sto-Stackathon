@@ -1,6 +1,7 @@
-'use strict'
+//'use strict'
 
-const {db, models: {User, } } = require('../server/db')
+const { DATEONLY } = require('sequelize');
+const {db, models: {User, Trip, Stay} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,11 +13,8 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ firstName: 'Erik', lastName: 'Birkeland', username: 'erik', password: 'scr33ch' }),
-    User.create({ firstName: 'Adam', lastName: 'Stoler', username: 'adam', password: 'scr33ch' }),
-  ])
-  
-  const members = await Promise.all([
+    User.create({ firstName: 'Erik', lastName: 'Birkeland', isAdmin: 1, username: 'erik', password: 'scr33ch' }),
+    User.create({ firstName: 'Adam', lastName: 'Stoler', isAdmin: 1, username: 'adam', password: 'scr33ch' }),
     User.create({ firstName: 'Steven', lastName: 'Tyler' }),
     User.create({ firstName: 'Joe', lastName: 'Perry' }),
     User.create({ firstName: 'Geddy', lastName: 'Lee' }),
@@ -24,14 +22,39 @@ async function seed() {
     User.create({ firstName: 'Perry', lastName: 'Farrell' }),
     User.create({ firstName: 'Dave', lastName: 'Navarro' }),
     User.create({ firstName: 'David Lee', lastName: 'Roth' }),
-  ])
+  ]);
+  
+  //creating trips
+  const trips = await Promise.all([
+    Trip.create({ city: 'Seattle', hotel: 'Springhill Suites by Marriott Seattle Downtown/South Lake Union', checkIn: '2022-07-18', checkOut: '2022-08-08' }),
+    Trip.create({ city: 'Spokane', hotel: 'DoubleTree by Hilton Hotel Spokane City Center', checkIn: '2022-08-08', checkOut: '2022-08-15' }),
+    Trip.create({ city: 'Vancouver', hotel: 'Delta Hotels by Marriott Vancouver Downtown Suites', checkIn: '2022-08-15', checkOut: '2022-08-29' }),
+  ]);
+  
+  //creating stays
+  const stays = await Promise.all([
+    Stay.create({ companyHousing: 1, microwave: 1 }),
+    Stay.create({ companyHousing: 1, microwave: 1 }),
+    Stay.create({ companyHousing: 1, microwave: 1 }),
+    Stay.create({ companyHousing: 1, kitchen: 1 }),
+    Stay.create({ companyHousing: 1, kitchen: 1 }),
+    Stay.create({ companyHousing: 1, kitchen: 1 }),
+    Stay.create({ companyHousing: 1, kitchen: 1 }),
+    Stay.create({ companyHousing: 1, kitchen: 1 }),
+  ]);
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${users.length} users, ${trips.length} trips`)
   console.log(`seeded successfully`)
+  console.log(trips)
   return {
     users: {
       erik: users[0],
       adam: users[1]
+    },
+    trips: {
+      seattle: trips[0],
+      spokane: trips[1],
+      vancouver: trips[2]
     }
   }
 }
