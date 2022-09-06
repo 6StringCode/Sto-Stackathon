@@ -2,16 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 
-/**
- * COMPONENT
- */
-const Home = props => {
-  const {fullName, trips} = props
-  console.log(trips);
+
+const Trips = props => {
+  const {trips} = props
   return (
     <div>
-      <h3>Welcome, {fullName}</h3>
-      <h3>You have {trips.length} upcoming trips:</h3>
+      <h3>All {trips.length} upcoming trips:</h3>
       <ul>
         {
           trips.map(trip => {
@@ -25,13 +21,9 @@ const Home = props => {
   )
 }
 
-/**
- * CONTAINER
- */
+
 const mapState = state => {
   return {
-    username: state.auth.username,
-    fullName: state.auth.fullName,
     trips: state.trips
   }
 }
@@ -44,4 +36,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Home)
+export default connect(mapState, mapDispatch)(Trips)
