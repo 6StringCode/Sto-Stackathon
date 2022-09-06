@@ -19,7 +19,8 @@ const User = db.define('user', {
     type: Sequelize.VIRTUAL,
     get() {
       return `${this.firstName} ${this.lastName}`;
-    }
+    },
+    unique: true
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
