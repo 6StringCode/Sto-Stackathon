@@ -43,9 +43,9 @@ async function seed() {
     Stay.create({ companyHousing: 1, amenity: 'MICROWAVE' }),
   ]);
 
-  stays[0].userId = users[1].id;
+  stays[0].userId = users[8].id;
   stays[0].tripId = trips[2].id;
-  stays[5].userId = users[2].id;
+  stays[5].userId = users[7].id;
   stays[5].tripId = trips[2].id;
   await Promise.all([
     stays[0].save(),

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
-import {me} from './store'
+import {fetchTrips, me} from './store'
 
 /**
  * COMPONENT
@@ -11,6 +11,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+  }
+  componentDidUpdate(prevProps) {
+    if(!prevProps.isLoggedIn && this.props.isLoggedIn){
+      this.props.loadData()
+    }
   }
 
   render() {
@@ -50,6 +55,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    loadData() {
+      dispatch(fetchTrips())
     }
   }
 }
