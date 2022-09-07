@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom'
 
 const CompanyMember = props => {
   const { users } = props
-  console.log(users);
   return (
     <div>
-      <h3>{users.length} Company Members:</h3>
+      {/* <h3>{users.length} Company Members:</h3>
       <ul>
         {
           users.map(user => {
@@ -17,7 +16,7 @@ const CompanyMember = props => {
             )
           })
         }
-      </ul>
+      </ul> */}
     </div>
   )
 }

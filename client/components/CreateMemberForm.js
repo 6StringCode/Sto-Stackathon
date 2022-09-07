@@ -5,8 +5,8 @@ import { createUser } from '../store/users';
 
 
 class createMemberForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             firstName: '',
             lastName: '',
@@ -18,6 +18,12 @@ class createMemberForm extends Component {
         this.save = this.save.bind(this);
         this.onChange = this.onChange.bind(this);
     }
+    componentDidUpdate(prevProps) {
+        if(!prevProps && this.props){
+          this.props.loadData()
+        }
+    }
+
     onChange(ev) {
         this.setState({
           [ev.target.name]: ev.target.value,
@@ -67,14 +73,18 @@ class createMemberForm extends Component {
                     </div>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>Department</p>
-                        <input 
+                        <select 
                             className="form-control" 
-                            placeholder="required" 
                             name='department'
                             value={ department } 
                             onChange={ onChange }
                             >
-                        </input><br />
+                                <option value={'MANAGEMENT'}>Management</option>
+                                <option value={'CREW'}>Crew</option>
+                                <option value={'MUSIC'}>Music</option>
+                                <option value={'ACTOR'}>Actor</option>
+                                <option value={'OTHER'}>Other</option>
+                        </select><br />
                     </div>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>Avatar</p>
