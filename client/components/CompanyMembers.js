@@ -6,7 +6,6 @@ import CreateMemberForm from './CreateMemberForm'
 
 const CompanyMembers = props => {
   const { users } = props
-  console.log(users);
   return (
     <div>
       <div>

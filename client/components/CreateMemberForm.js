@@ -10,53 +10,104 @@ class createMemberForm extends Component {
         this.state = {
             firstName: '',
             lastName: '',
+            department: '',
             avatar: '',
             username: '',
             password: ''
         }
         this.save = this.save.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
-    save(ev) {
+    onChange(ev) {
+        this.setState({
+          [ev.target.name]: ev.target.value,
+        });
+    }   
+    async save(ev) {
         ev.preventDefault();
         const newUser = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
+            department: this.state.department,
             avatar: this.state.avatar,
             username: this.state.username,
             password: this.state.password
         };
         this.props.createUser(newUser);
+        //await this.props.createUser({ ...this.state });
     }
     render() {
-        const { firstName, lastName, avatar, username, password } = this.state;
-        const { save } = this;
+        const { firstName, lastName, department, avatar, username, password } = this.state;
+        const { save, onChange } = this;
         return (
-            <div className='mt-5' style={{ maxWidth: '800px', width: '50%', dislay: 'block', margin: '0 auto' }}>
+            <div>
                 <h4 className='text-center'>Add a Company Member</h4>
                 <form onSubmit={ save }>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>First Name</p>
-                        <input className="form-control" placeholder="required" value={ firstName } onChange={ ev => this.setState({ firstName: ev.target.value })}></input><br />
+                        <input 
+                            className="form-control" 
+                            placeholder="required" 
+                            name='firstName' 
+                            value={ firstName } 
+                            onChange={ onChange }
+                            >
+                        </input><br />
                     </div>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>Last Name</p>
-                        <input className="form-control" placeholder="required" value={ lastName } onChange={ ev => this.setState({ lastName: ev.target.value })}></input><br />
+                        <input 
+                            className="form-control" 
+                            placeholder="required" 
+                            name='lastName'
+                            value={ lastName } 
+                            onChange={ onChange }
+                            >
+                        </input><br />
                     </div>
-                    {/* <div className="control-group">
+                    <div className="control-group">
+                        <p style={{ marginBottom: 0 }}>Department</p>
+                        <input 
+                            className="form-control" 
+                            placeholder="required" 
+                            name='department'
+                            value={ department } 
+                            onChange={ onChange }
+                            >
+                        </input><br />
+                    </div>
+                    <div className="control-group">
                         <p style={{ marginBottom: 0 }}>Avatar</p>
-                        <input className="form-control" value={ avatar } onChange={ ev => this.setState({ avatar: ev.target.value })}></input><br />
-                    </div> */}
+                        <input 
+                            className="form-control" 
+                            name="avatar"
+                            value={ avatar } 
+                            onChange={ onChange }
+                            >
+                        </input><br />
+                    </div>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>Username</p>
-                        <input className="form-control" value={ username } onChange={ ev => this.setState({ username: ev.target.value })}></input><br />
+                        <input 
+                            className="form-control" 
+                            name="username"
+                            value={ username } 
+                            onChange={ onChange }
+                            >
+                        </input><br />
                     </div>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>Password</p>
-                        <input className="form-control" value={ password } onChange={ ev => this.setState({ password: ev.target.value })}></input><br />
+                        <input 
+                            className="form-control" 
+                            name="password"
+                            value={ password } 
+                            onChange={ onChange }
+                            >
+                        </input><br />
                     </div>
     
                     <div className='text-center'>
-                        {/* <Link to='/account/addressbook'><button className="btn btn-primary py-2 px-4 mr-5" >Cancel</button></Link> */}
                         <button className="btn btn-primary py-2 px-4 ml-5" disabled={ !firstName || !lastName }>Save</button>
                     </div>
                 </form>
@@ -68,7 +119,11 @@ class createMemberForm extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
     return {
-        createUser: (user) => dispatch(createUser(user, history))
+        createUser: (user) => dispatch(createUser(user, history)),
+        loadData() {
+            dispatch(fetchTrips()),
+            dispatch(fetchUsers())
+          }
     }
 }
 

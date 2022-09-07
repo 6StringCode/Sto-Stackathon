@@ -20,7 +20,10 @@ const User = db.define('user', {
     get() {
       return `${this.firstName} ${this.lastName}`;
     },
-    unique: true
+    //unique: true
+  },
+  department: {
+    type: Sequelize.ENUM('MANAGEMENT', 'CREW', 'MUSIC', 'ACTOR', 'OTHER')
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,

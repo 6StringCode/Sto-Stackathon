@@ -13,15 +13,15 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ firstName: 'Erik', lastName: 'Birkeland', isAdmin: 1, username: 'erik', password: 'screech' }),
-    User.create({ firstName: 'Adam', lastName: 'Stoler', isAdmin: 1, username: 'adam', password: 'screech' }),
-    User.create({ firstName: 'Steven', lastName: 'Tyler' }),
-    User.create({ firstName: 'Joe', lastName: 'Perry' }),
-    User.create({ firstName: 'Geddy', lastName: 'Lee' }),
-    User.create({ firstName: 'Steve', lastName: 'Jordan' }),
-    User.create({ firstName: 'Perry', lastName: 'Farrell' }),
-    User.create({ firstName: 'Dave', lastName: 'Navarro' }),
-    User.create({ firstName: 'David Lee', lastName: 'Roth' }),
+    User.create({ firstName: 'Erik', lastName: 'Birkeland', department: 'MANAGEMENT', isAdmin: 1, username: 'erik', password: 'screech' }),
+    User.create({ firstName: 'Adam', lastName: 'Stoler', department: 'MUSIC', isAdmin: 1, username: 'adam', password: 'screech' }),
+    User.create({ firstName: 'Steven', lastName: 'Tyler', department: 'MUSIC' }),
+    User.create({ firstName: 'Joe', lastName: 'Perry', department: 'MUSIC' }),
+    User.create({ firstName: 'Geddy', lastName: 'Lee', department: 'MUSIC' }),
+    User.create({ firstName: 'Steve', lastName: 'Jordan', department: 'MUSIC' }),
+    User.create({ firstName: 'Perry', lastName: 'Farrell', department: 'MUSIC' }),
+    User.create({ firstName: 'Dave', lastName: 'Navarro', department: 'MUSIC' }),
+    User.create({ firstName: 'David Lee', lastName: 'Roth', department: 'ACTOR' }),
   ]);
   
   //creating trips
@@ -54,7 +54,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users, ${trips.length} trips`)
   console.log(`seeded successfully`)
-  console.log(users.map(user => user.fullName))
+  console.log(users.map(user => `${user.fullName} - ${user.department}`));
   return {
     users: {
       erik: users[0],
