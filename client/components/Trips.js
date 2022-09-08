@@ -12,7 +12,8 @@ const Trips = props => {
         {
           trips.map(trip => {
             return (
-              <li key={trip.city}><Link>{trip.city} - {trip.hotel}</Link>. <b>Check in: </b> {trip.checkIn} <b>Check out: </b> {trip.checkOut}</li>
+              <li key={trip.id}>
+                <Link to={`/trips/${trip.id}`}>{trip.city} - {trip.hotel}</Link>. <b>Check in: </b> {trip.checkIn} <b>Check out: </b> {trip.checkOut}</li>
             )
           })
         }

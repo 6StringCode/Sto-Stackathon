@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import CreateMemberForm from './CreateMemberForm'
-
+import CompanyMember from './CompanyMember'
 
 const CompanyMembers = props => {
   const { users } = props
@@ -14,7 +14,9 @@ const CompanyMembers = props => {
           {
             users.map(user => {
               return (
-                <li key={user.fullName}>{user.fullName}</li>
+                <li key={user.id}>
+                  <Link to={`/companyMembers/${user.id}`}>{user.fullName}</Link>
+                </li>
               )
             })
           }

@@ -1,31 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
-const CompanyMember = props => {
-  const { users } = props
-  return (
-    <div>
-      {/* <h3>{users.length} Company Members:</h3>
-      <ul>
-        {
-          users.map(user => {
-            return (
-              <li key={user.fullName}>{user.fullName}</li>
-            )
-          })
-        }
-      </ul> */}
-    </div>
-  )
-}
-
-
-const mapState = state => {
-  return {
-    users: state.users,
+class CompanyMember extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      user: {}
+    }
   }
+  componentDidMount(){
+    this.setState({
+      user: this.props.user
+    })
+  }
+  render() { 
+    const { user } = this.state;
+    return ( 
+      <div>
+        <h2>Hello {user.fullName} </h2>
+      </div>
+    );
+  }
+}
+ 
+
+const mapState = ({ users }, ownProps) => {
+  const id = ownProps.match.params.id;
+  console.log(users);
+  const user = users.find( user => user.id === id*1) || {};
+  return {
+    user
+  };
 }
 
 const mapDispatch = (dispatch) => {

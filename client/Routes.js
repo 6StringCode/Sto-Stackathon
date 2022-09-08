@@ -5,7 +5,9 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {fetchTrips, fetchUsers, me} from './store';
 import Trips from './components/Trips';
+import Trip from './components/Trip';
 import CompanyMembers from './components/CompanyMembers';
+import CompanyMember from './components/CompanyMember';
 
 /**
  * COMPONENT
@@ -29,8 +31,10 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
-            <Route path="/trips" component={Trips} />
-            <Route path="/companyMembers" component={CompanyMembers} />
+            <Route exact path="/trips" component={Trips} />
+            <Route exact path="/trips/:id" component={Trip} />
+            <Route exact path="/companyMembers" component={CompanyMembers} />
+            <Route exact path="/companyMembers/:id" component={CompanyMember} />
           </Switch>
         ) : (
           <Switch>
