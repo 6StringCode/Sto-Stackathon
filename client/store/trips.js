@@ -10,7 +10,6 @@ const trips = (state = [], action)=> {
 export const fetchTrips = ()=> {
     return async(dispatch) => {
         const trips = (await axios.get('/api/trips')).data;
-        //console.log(trips);
         dispatch({ type: 'SET_TRIPS', trips });
     }
 }

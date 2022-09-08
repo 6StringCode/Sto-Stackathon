@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import CreateMemberForm from './CreateMemberForm'
-import CompanyMember from './CompanyMember'
 
 const CompanyMembers = props => {
   const { users } = props
