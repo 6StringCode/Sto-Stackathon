@@ -25,12 +25,18 @@ async function seed() {
   ]);
   
   //creating trips
-  const trips = await Promise.all([
+  // const trips = await Promise.all([
+  //   Trip.create({ city: 'Seattle', hotel: 'Springhill Suites by Marriott Seattle Downtown/South Lake Union', checkIn: '2022-07-18', checkOut: '2022-08-08' }),
+  //   Trip.create({ city: 'Spokane', hotel: 'DoubleTree by Hilton Hotel Spokane City Center', checkIn: '2022-08-08', checkOut: '2022-08-15' }),
+  //   Trip.create({ city: 'Vancouver', hotel: 'Delta Hotels by Marriott Vancouver Downtown Suites', checkIn: '2022-08-15', checkOut: '2022-08-29' }),
+  // ]);
+  const [seattle, spokane, vancouver] = await Promise.all([
     Trip.create({ city: 'Seattle', hotel: 'Springhill Suites by Marriott Seattle Downtown/South Lake Union', checkIn: '2022-07-18', checkOut: '2022-08-08' }),
     Trip.create({ city: 'Spokane', hotel: 'DoubleTree by Hilton Hotel Spokane City Center', checkIn: '2022-08-08', checkOut: '2022-08-15' }),
     Trip.create({ city: 'Vancouver', hotel: 'Delta Hotels by Marriott Vancouver Downtown Suites', checkIn: '2022-08-15', checkOut: '2022-08-29' }),
   ]);
-  
+  const trips = [seattle, spokane, vancouver];
+
   //creating stays
   const stays = await Promise.all([
     Stay.create({ companyHousing: 1, amenity: 'KITCHEN' }),
@@ -43,13 +49,26 @@ async function seed() {
     Stay.create({ companyHousing: 1, amenity: 'MICROWAVE' }),
   ]);
 
+  console.log(vancouver.id);
+  stays[0].tripId = vancouver.id;
+  stays[1].tripId = vancouver.id;
+  stays[2].tripId = vancouver.id;
+  stays[3].tripId = vancouver.id;
+  stays[4].tripId = vancouver.id;
+  stays[5].tripId = vancouver.id;
+  stays[6].tripId = vancouver.id;
+  stays[7].tripId = vancouver.id;
   stays[0].userId = users[8].id;
-  stays[0].tripId = trips[2].id;
   stays[5].userId = users[7].id;
-  stays[5].tripId = trips[2].id;
   await Promise.all([
     stays[0].save(),
-    stays[5].save()
+    stays[1].save(),
+    stays[2].save(),
+    stays[3].save(),
+    stays[4].save(),
+    stays[5].save(),
+    stays[6].save(),
+    stays[7].save()
   ]);
 
   console.log(`seeded ${users.length} users, ${trips.length} trips`)
