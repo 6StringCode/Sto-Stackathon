@@ -5,7 +5,7 @@ const users = (state = [], action)=> {
         return action.users;
     }
     if(action.type === 'CREATE_USER'){
-        return action.user;
+        return [...state, action.user]
     }
     return state;
 };

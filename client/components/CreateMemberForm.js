@@ -40,7 +40,14 @@ class createMemberForm extends Component {
             password: this.state.password
         };
         this.props.createUser(newUser);
-        //await this.props.createUser({ ...this.state });
+        this.setState({
+            firstName: '',
+            lastName: '',
+            department: '',
+            avatar: '',
+            username: '',
+            password: ''
+        })
     }
     render() {
         const { firstName, lastName, department, avatar, username, password } = this.state;
