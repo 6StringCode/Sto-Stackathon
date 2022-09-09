@@ -21,3 +21,12 @@ router.post('/', async(req, res, next)=> {
 
 });
 
+router.put('/:id', async(req, res, next)=> {
+  try {
+    const trip = await Trip.findByPk(req.params.id);
+    res.send(await trip.update(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+});

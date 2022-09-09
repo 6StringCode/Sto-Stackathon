@@ -7,27 +7,28 @@ class EditMemberForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            department: '',
-            isAdmin: '',
-            avatar: '',
-            username: '',
-            password: ''
+            firstName: this.props.user?.firstName || '',
+            lastName: this.props.user?.lastName || '',
+            department: this.props.user?.department || '',
+            isAdmin: this.props.user?.isAdmin || false,
+            avatar: this.props.user?.avatar || '',
+            username: this.props.user?.username || '',
+            password: this.props.user?.password || ''
         }
         this.save = this.save.bind(this);
         this.onChange = this.onChange.bind(this);
     }
     componentDidMount(){
       this.setState({
-        firstName: this.props.user.firstName,
-        lastName: this.props.user.lastName,
-        department: this.props.user.department,
-        isAdmin: this.props.user.isAdmin,
-        username: this.props.user.username,
-        password: this.props.user.password,
-        avatar: this.props.user.avatar,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        department: this.state.department,
+        isAdmin: this.state.isAdmin,
+        username: this.state.username,
+        password: this.state.password,
+        avatar: this.state.avatar,
       })
+      console.log(this.props.firstName);
       // this.el.addEventListener('change', ev => {
       //   const file = ev.target.files[0];
       //   const reader = new FileReader();
@@ -38,7 +39,7 @@ class EditMemberForm extends Component {
       // })
     }
     componentDidUpdate(prevProps) {
-        if(!prevProps.user.id && this.props.user.id){
+        if(!prevProps.user?.id && this.props.user?.id){
           this.setState({
             firstName: this.props.user.firstName,
             lastName: this.props.user.lastName,

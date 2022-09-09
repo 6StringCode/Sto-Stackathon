@@ -7,6 +7,9 @@ const trips = (state = [], action)=> {
     if(action.type === 'CREATE_TRIP'){
         return [...state, action.trip]
     }
+    if(action.type === 'UPDATE_TRIP'){
+        return state.map((trip) => trip.id === action.trip.id ? action.trip: trip);
+      }
     return state;
 };
 
@@ -29,6 +32,20 @@ export const createTrip = (trip) => {
         dispatch({ type: 'CREATE_TRIP', trip })
       }
     };
-  };
+};
+
+export const updateTrip = (trip) => {
+    return async(dispatch) => {
+        const token = window.localStorage.getItem('token');
+        if(token) {
+        trip = (await axios.put(`/api/trips/${ trip.id }`, trip, {
+            headers: {
+            authorization: token
+            }
+        })).data;
+        dispatch({ type: 'UPDATE_TRIP', trip })
+        }
+    }
+}
 
 export default trips;

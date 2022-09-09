@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createUser } from '../store/users';
+import { createUser, updateUser } from '../store/users';
 
 
 class createMemberForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            department: '',
-            isAdmin: '',
-            avatar: '',
-            username: '',
-            password: ''
+            firstName: this.props.user?.firstName || '',
+            lastName: this.props.user?.lastName || '',
+            department: this.props.user?.department || '',
+            isAdmin: this.props.user?.isAdmin || false,
+            avatar: this.props.user?.avatar || '',
+            username: this.props.user?.username || '',
+            password: this.props.user?.password || ''
         }
         this.save = this.save.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -25,8 +25,10 @@ class createMemberForm extends Component {
     }
 
     onChange(ev) {
+        //console.log(ev.target)
+        const value = ev.target.type === 'checkbox' ? ev.target.checked : ev.target.value;
         this.setState({
-          [ev.target.name]: ev.target.value,
+          [ev.target.name]: value,
         });
     }   
     async save(ev) {
@@ -40,19 +42,24 @@ class createMemberForm extends Component {
             username: this.state.username,
             password: this.state.password
         };
-        this.props.createUser(newUser);
+        if(this.props.user){
+                this.props.updateUser({ ...newUser, id: this.props.user.id })
+        }
+        else {
+            this.props.createUser(newUser);
+        }
         this.setState({
             firstName: '',
             lastName: '',
             department: '',
-            isAdmin: '',
+            isAdmin: false,
             avatar: '',
             username: '',
             password: ''
         })
     }
     render() {
-        const { firstName, lastName, department, isAdmin, avatar, username, password } = this.state;
+        const { firstName, lastName, department, isAdmin, username, password, avatar } = this.state;
         const { save, onChange } = this;
         return (
             <div>
@@ -85,14 +92,15 @@ class createMemberForm extends Component {
                         <select 
                             className="form-control" 
                             name='department'
-                            value={ department } 
+                            value={ department }
                             onChange={ onChange }
                             >
-                                <option value={'MANAGEMENT'}>Management</option>
-                                <option value={'CREW'}>Crew</option>
-                                <option value={'MUSIC'}>Music</option>
-                                <option value={'ACTOR'}>Actor</option>
-                                <option value={'OTHER'}>Other</option>
+                                <option value=''>Select a Department</option>
+                                <option value='MANAGEMENT'>Management</option>
+                                <option value='CREW'>Crew</option>
+                                <option value='MUSIC'>Music</option>
+                                <option value='ACTOR'>Actor</option>
+                                <option value='OTHER'>Other</option>
                         </select><br />
                     </div>
                     <div className="control-group">
@@ -106,13 +114,26 @@ class createMemberForm extends Component {
                             >
                         </input><br />
                     </div>
+                    {/* <div className="control-group">
+                        <label>Admin</label>
+                        <select 
+                            className="form-control" 
+                            name='admin'
+                            value={isAdmin}
+                            onChange={ onChange }
+                            >
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+                        </select><br />
+                    </div> */}
                     <div className="control-group">
                         <label>Admin</label>
                         <input 
                             className="form-control" 
                             type="checkbox"
                             name="isAdmin"
-                            value={ isAdmin } 
+                            value={ isAdmin }
+                            checked={ isAdmin }
                             onChange={ onChange }
                             >
                         </input><br />
@@ -131,6 +152,7 @@ class createMemberForm extends Component {
                         <label>Password</label>
                         <input 
                             className="form-control" 
+                            type="password"
                             name="password"
                             value={ password } 
                             onChange={ onChange }
@@ -139,7 +161,7 @@ class createMemberForm extends Component {
                     </div>
     
                     <div className='text-center'>
-                        <button className="btn btn-primary py-2 px-4 ml-5" disabled={ !firstName || !lastName }>Save</button>
+                        <button className="btn btn-primary py-2 px-4 ml-5" disabled={ !firstName || !lastName || !department }>Save</button>
                     </div>
                 </form>
             </div>
@@ -151,6 +173,7 @@ class createMemberForm extends Component {
 const mapDispatchToProps = (dispatch, { history }) => {
     return {
         createUser: (user) => dispatch(createUser(user, history)),
+        updateUser: (user) => dispatch(updateUser(user, history)),
         loadData() {
             dispatch(fetchTrips()),
             dispatch(fetchUsers())

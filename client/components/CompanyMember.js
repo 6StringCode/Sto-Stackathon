@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
-import EditMemberForm from './EditMemberForm';
+import CreateMemberForm from './CreateMemberForm';
 
 
 class CompanyMember extends Component {
@@ -18,7 +18,7 @@ class CompanyMember extends Component {
   }
 
   componentDidUpdate(prevProps){
-    if(!prevProps.user.id && this.props.user.id){
+    if(JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)){
       this.setState({
         user: this.props.user
       })
@@ -37,7 +37,7 @@ class CompanyMember extends Component {
           <p>Department: {user.department}</p>
         </div>
         <div>
-          {/* <EditMemberForm /> */}
+          <CreateMemberForm user={ this.props.user }/>
         </div>
       </div>
     );
@@ -46,7 +46,6 @@ class CompanyMember extends Component {
 
 const mapState = ({ users }, ownProps) => {
   const id = ownProps.match.params.id;
-  console.log(users);
   const user = users.find( user => user.id === id*1) || {};
   return {
     user

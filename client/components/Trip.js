@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 // import { Link } from 'react-router-dom'
+import StayForm from './StayForm'
 
 const Trip = props => {
-  const {trip, stays } = props
+  const { trip, tripStays } = props
+  //console.log(stays)
   return (
     <div>
       <h3>Details for {trip.city}'s upcoming stay:</h3>
@@ -16,28 +18,30 @@ const Trip = props => {
       <div>
         Checking Out: {trip.checkOut}
       </div>
+        <StayForm tripStays={ tripStays }/>
       <ul>
-        {/* {
-          stays.map(stay => {
+        {
+          tripStays.map(stay => {
             return (
               <li key={stay.id}>
                 {stay.amenity}
               </li>
             )
           })
-        } */}
+        }
       </ul>
     </div>
   )
 }
 
-const mapState = ({trips}, {match}) => {
+const mapState = ({trips, stays}, {match}) => {
   const id = match.params.id;
   const trip = trips.find( trip => trip.id === id * 1) || {};
-  //const stays = stays.find( stay => stay.tripId === trip.id) || {};
+  console.log(stays);
+  const tripStays = stays.filter( stay => stay.tripId === trip.id) || [];
   return {
     trip,
-
+    tripStays
   
   }
 }

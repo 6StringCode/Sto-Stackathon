@@ -1,30 +1,32 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import stays from '../store/stays';
 
 
-const Trips = props => {
-  const {trips} = props
-  return (
-    <div>
-      <h3>All {trips.length} upcoming trips:</h3>
-      <ul>
-        {
-          trips.map(trip => {
-            return (
-              <li key={trip.city}><Link>{trip.city} - {trip.hotel}</Link>. <b>Check in: </b> {trip.checkIn} <b>Check out: </b> {trip.checkOut}</li>
-            )
-          })
-        }
-      </ul>
-    </div>
-  )
+class StayForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      companyHousing: '',
+      amenity: ''
+    }
+  }
+  state = {  }
+  render() { 
+    const { companyHousing, amenity } = this.state;
+    return (  
+      <div>
+        <h4>There are {this.props.tripStays.length} Stays</h4>
+      </div>
+    );
+  }
 }
 
 
 const mapState = state => {
   return {
-    trips: state.trips
+    stays: state.stays
   }
 }
 
@@ -32,8 +34,11 @@ const mapDispatch = (dispatch) => {
   return {
     fetchTrips: ()=> {
       dispatch(fetchTrips())
+    },
+    fetchStays: ()=> {
+      dispatch(fetchStays())
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(Trips)
+export default connect(mapState, mapDispatch)(StayForm)
