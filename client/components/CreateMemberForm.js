@@ -97,6 +97,7 @@ class createMemberForm extends Component {
                         <p style={{ marginBottom: 0 }}>Avatar</p>
                         <input 
                             className="form-control" 
+                            type="file"
                             name="avatar"
                             value={ avatar } 
                             onChange={ onChange }

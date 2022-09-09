@@ -10,3 +10,14 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async(req, res, next)=> {
+  try {
+    res.status(201).send(await Trip.create(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+
+});
+
