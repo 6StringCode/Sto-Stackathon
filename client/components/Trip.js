@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 
 const Trip = props => {
   const {trip, stays } = props
-  console.log(props)
   return (
     <div>
       <h3>Details for {trip.city}'s upcoming stay:</h3>

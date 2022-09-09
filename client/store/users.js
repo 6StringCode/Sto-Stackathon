@@ -7,6 +7,9 @@ const users = (state = [], action)=> {
     if(action.type === 'CREATE_USER'){
         return [...state, action.user]
     }
+    if(action.type === 'UPDATE_USER'){
+      return state.map((user) => user.id === action.user.id ? action.user: user);
+    }
     return state;
 };
 
@@ -32,5 +35,18 @@ export const createUser = (user) => {
     };
   };
 
+export const updateUser = (user) => {
+  return async(dispatch) => {
+    const token = window.localStorage.getItem('token');
+    if(token) {
+      user = (await axios.put(`/api/users/${ user.id }`, user, {
+        headers: {
+          authorization: token
+        }
+      })).data;
+      dispatch({ type: 'UPDATE_USER', user })
+    }
+  }
+}
 
 export default users;

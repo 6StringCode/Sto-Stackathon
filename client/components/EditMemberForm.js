@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createUser } from '../store/users';
+import { updateUser } from '../store/users';
 
 
-class createMemberForm extends Component {
+class EditMemberForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,9 +18,36 @@ class createMemberForm extends Component {
         this.save = this.save.bind(this);
         this.onChange = this.onChange.bind(this);
     }
+    componentDidMount(){
+      this.setState({
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName,
+        department: this.props.user.department,
+        isAdmin: this.props.user.isAdmin,
+        username: this.props.user.username,
+        password: this.props.user.password,
+        avatar: this.props.user.avatar,
+      })
+      // this.el.addEventListener('change', ev => {
+      //   const file = ev.target.files[0];
+      //   const reader = new FileReader();
+      //   reader.addEventListener('load', () => {
+      //       this.setState({ image: reader.result });
+      //   })
+      //   reader.readAsDataURL(file);
+      // })
+    }
     componentDidUpdate(prevProps) {
-        if(!prevProps && this.props){
-          this.props.loadData()
+        if(!prevProps.user.id && this.props.user.id){
+          this.setState({
+            firstName: this.props.user.firstName,
+            lastName: this.props.user.lastName,
+            department: this.props.user.department,
+            isAdmin: this.props.user.isAdmin,
+            username: this.props.user.username,
+            password: this.props.user.password,
+            avatar: this.props.user.avatar,
+          })
         }
     }
 
@@ -31,7 +58,7 @@ class createMemberForm extends Component {
     }   
     async save(ev) {
         ev.preventDefault();
-        const newUser = {
+        const updatedUser = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             department: this.state.department,
@@ -40,7 +67,7 @@ class createMemberForm extends Component {
             username: this.state.username,
             password: this.state.password
         };
-        this.props.createUser(newUser);
+        this.props.updateUser(updatedUser);
         this.setState({
             firstName: '',
             lastName: '',
@@ -52,14 +79,14 @@ class createMemberForm extends Component {
         })
     }
     render() {
-        const { firstName, lastName, department, isAdmin, avatar, username, password } = this.state;
+        const { firstName, lastName, department, avatar, username, password } = this.state;
         const { save, onChange } = this;
         return (
             <div>
                 <h4 className='text-center'>Add a Company Member</h4>
                 <form onSubmit={ save }>
                     <div className="control-group">
-                        <label>First Name</label>
+                        <p style={{ marginBottom: 0 }}>First Name</p>
                         <input 
                             className="form-control" 
                             placeholder="required" 
@@ -70,7 +97,7 @@ class createMemberForm extends Component {
                         </input><br />
                     </div>
                     <div className="control-group">
-                        <label>Last Name</label>
+                        <p style={{ marginBottom: 0 }}>Last Name</p>
                         <input 
                             className="form-control" 
                             placeholder="required" 
@@ -81,7 +108,7 @@ class createMemberForm extends Component {
                         </input><br />
                     </div>
                     <div className="control-group">
-                        <label>Department</label>
+                        <p style={{ marginBottom: 0 }}>Department</p>
                         <select 
                             className="form-control" 
                             name='department'
@@ -96,7 +123,7 @@ class createMemberForm extends Component {
                         </select><br />
                     </div>
                     <div className="control-group">
-                        <label>Photo</label>
+                        <p style={{ marginBottom: 0 }}>Avatar</p>
                         <input 
                             className="form-control" 
                             type="file"
@@ -107,18 +134,7 @@ class createMemberForm extends Component {
                         </input><br />
                     </div>
                     <div className="control-group">
-                        <label>Admin</label>
-                        <input 
-                            className="form-control" 
-                            type="checkbox"
-                            name="isAdmin"
-                            value={ isAdmin } 
-                            onChange={ onChange }
-                            >
-                        </input><br />
-                    </div>
-                    <div className="control-group">
-                        <label>Username</label>
+                        <p style={{ marginBottom: 0 }}>Username</p>
                         <input 
                             className="form-control" 
                             name="username"
@@ -128,7 +144,7 @@ class createMemberForm extends Component {
                         </input><br />
                     </div>
                     <div className="control-group">
-                        <label>Password</label>
+                        <p style={{ marginBottom: 0 }}>Password</p>
                         <input 
                             className="form-control" 
                             name="password"
@@ -150,12 +166,12 @@ class createMemberForm extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
     return {
-        createUser: (user) => dispatch(createUser(user, history)),
+        updateUser: (user) => dispatch(updateUser(user, history)),
         loadData() {
             dispatch(fetchTrips()),
             dispatch(fetchUsers())
-          }
+        }
     }
 }
 
-export default connect(state => state, mapDispatchToProps)(createMemberForm);
+export default connect(state => state, mapDispatchToProps)(EditMemberForm);
