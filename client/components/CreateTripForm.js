@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createTrip } from '../store/trips';
+import { createTrip, updateTrip } from '../store/trips';
 
 
 class CreateTripForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: '',
-            hotel: '',
-            checkIn: '',
-            checkOut: ''
+            city: this.props.user?.city || '',
+            hotel: this.props.user?.hotel || '',
+            checkIn: this.props.user?.checkIn || '',
+            checkOut: this.props.user?.checkOut || ''
+            // city: '',
+            // hotel: '',
+            // checkIn: '',
+            // checkOut: ''
         }
         this.save = this.save.bind(this);
         this.onChange = this.onChange.bind(this);
+    }
+    componentDidMount(){
+        this.setState({
+          trip: this.props.trip
+        })
     }
     componentDidUpdate(prevProps) {
         if(!prevProps && this.props){
@@ -34,7 +43,12 @@ class CreateTripForm extends Component {
             checkIn: this.state.checkIn,
             checkOut: this.state.checkOut
         };
-        this.props.createTrip(newTrip);
+        if(this.props.trip){
+            this.props.updateTrip({...newTrip, id: this.props.trip.id })
+        }
+        else {
+            this.props.createTrip(newTrip);
+        }
         this.setState({
             city: '',
             hotel: '',
@@ -47,7 +61,6 @@ class CreateTripForm extends Component {
         const { save, onChange } = this;
         return (
             <div>
-                <h4 className='text-center'>Add a New Trip</h4>
                 <form onSubmit={ save }>
                     <div className="control-group">
                         <p style={{ marginBottom: 0 }}>City</p>
@@ -106,6 +119,7 @@ class CreateTripForm extends Component {
 const mapDispatchToProps = (dispatch, { history }) => {
     return {
         createTrip: (trip) => dispatch(createTrip(trip, history)),
+        updateTrip: (trip) => dispatch(updateTrip(trip, history)),
         loadData() {
             dispatch(fetchTrips()),
             dispatch(fetchUsers())

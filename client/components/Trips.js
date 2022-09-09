@@ -15,13 +15,14 @@ const Trips = props => {
             trips.map(trip => {
               return (
                 <li key={trip.id}>
-                  <Link to={`/trips/${trip.id}`}>{trip.city} - {trip.hotel}</Link>. <b>Check in: </b> {trip.checkIn} <b>Check out: </b> {trip.checkOut}</li>
+                  <Link to={`/trips/${trip.id}`}>{trip.city} - {trip.hotel}</Link> <b>Check in: </b> {trip.checkIn} <b>Check out: </b> {trip.checkOut}</li>
               )
             })
           }
         </ul>
       </div>
       <div>
+        <h4 className='text-center'>Add a New City</h4>
         <CreateTripForm />
       </div>
     </div>

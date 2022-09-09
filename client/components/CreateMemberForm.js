@@ -114,18 +114,6 @@ class createMemberForm extends Component {
                             >
                         </input><br />
                     </div>
-                    {/* <div className="control-group">
-                        <label>Admin</label>
-                        <select 
-                            className="form-control" 
-                            name='admin'
-                            value={isAdmin}
-                            onChange={ onChange }
-                            >
-                                <option value='true'>Yes</option>
-                                <option value='false'>No</option>
-                        </select><br />
-                    </div> */}
                     <div className="control-group">
                         <label>Admin</label>
                         <input 

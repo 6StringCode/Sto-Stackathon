@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import CreateTripForm from './CreateTripForm'
 // import { Link } from 'react-router-dom'
 import StayForm from './StayForm'
 
@@ -18,6 +19,8 @@ const Trip = props => {
       <div>
         Checking Out: {trip.checkOut}
       </div>
+        <h4 className='text-center'>Edit City Info</h4>
+        <CreateTripForm trip={ trip }/>
         <StayForm tripStays={ tripStays }/>
       <ul>
         {
