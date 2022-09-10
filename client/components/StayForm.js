@@ -32,7 +32,7 @@ class StayForm extends Component {
     const newStay = {
         amenity: this.state.amenity,
         quantity:  this.state.quantity,
-        tripId: this.props.trip.id
+        tripId: this.props.trip.id,
     };
     console.log(newStay)
     this.props.createStay(newStay);
