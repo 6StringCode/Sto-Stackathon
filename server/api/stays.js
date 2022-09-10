@@ -13,7 +13,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async(req, res, next)=> {
   try {
-    res.status(201).send(await Stay.create(req.body));
+    for(let i= 0; i < req.body.quantity*1; i++){
+      await Stay.create(req.body);
+    }
+    res.status(201).send(await Stay.findAll({ where: {
+      tripId: req.body.tripId
+    }}))
   }
   catch(ex){
     next(ex);

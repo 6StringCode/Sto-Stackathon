@@ -23,7 +23,7 @@ const Trip = props => {
           </div>
         </div>
         <div className='tripStays2'>
-          {/* <StayForm tripStays={ tripStays }/> */}
+          <StayForm tripStays={ tripStays } trip={ trip }/>
           <h4>There are {tripStays.length} Bonus Amenities</h4>
           <ul>
             {

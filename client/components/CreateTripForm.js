@@ -11,10 +11,6 @@ class CreateTripForm extends Component {
             hotel: this.props.user?.hotel || '',
             checkIn: this.props.user?.checkIn || '',
             checkOut: this.props.user?.checkOut || ''
-            // city: '',
-            // hotel: '',
-            // checkIn: '',
-            // checkOut: ''
         }
         this.save = this.save.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -62,7 +58,7 @@ class CreateTripForm extends Component {
         return (
             <div>
                 <form onSubmit={ save }>
-                    <div className="control-group">
+                    {/* <div className="control-group"> */}
                         <p style={{ marginBottom: 0 }}>City</p>
                         <input 
                             className="form-control" 
@@ -72,8 +68,8 @@ class CreateTripForm extends Component {
                             onChange={ onChange }
                             >
                         </input><br />
-                    </div>
-                    <div className="control-group">
+                    {/* </div> */}
+                    {/* <div className="control-group"> */}
                         <p style={{ marginBottom: 0 }}>Hotel</p>
                         <input 
                             className="form-control" 
@@ -83,8 +79,8 @@ class CreateTripForm extends Component {
                             onChange={ onChange }
                             >
                         </input><br />
-                    </div>
-                    <div className="control-group">
+                    {/* </div> */}
+                    {/* <div className="control-group"> */}
                         <p style={{ marginBottom: 0 }}>CheckIn</p>
                         <input 
                             className="form-control" 
@@ -94,8 +90,8 @@ class CreateTripForm extends Component {
                             onChange={ onChange }
                             >
                         </input><br />
-                    </div>
-                    <div className="control-group">
+                    {/* </div> */}
+                    {/* <div className="control-group"> */}
                         <p style={{ marginBottom: 0 }}>CheckOut</p>
                         <input 
                             className="form-control" 
@@ -105,7 +101,7 @@ class CreateTripForm extends Component {
                             onChange={ onChange }
                             >
                         </input><br />
-                    </div>
+                    {/* </div> */}
                     <div className='text-center'>
                         <button className="btn btn-primary py-2 px-4 ml-5" disabled={ !city || !checkIn || !checkOut }>Save</button>
                     </div>
