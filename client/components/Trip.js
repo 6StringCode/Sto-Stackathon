@@ -10,29 +10,36 @@ const Trip = props => {
   return (
     <div>
       <h3>Details for {trip.city}'s upcoming stay:</h3>
-      <div>
-        {trip.hotel}
-      </div>
-      <div>
-        Checking in: {trip.checkIn}
-      </div>
-      <div>
-        Checking Out: {trip.checkOut}
-      </div>
-        <h4 className='text-center'>Edit City Info</h4>
-        <CreateTripForm trip={ trip }/>
-        <StayForm tripStays={ tripStays }/>
-      <ul>
-        {
-          tripStays.map(stay => {
-            return (
-              <li key={stay.id}>
-                {stay.amenity}
-              </li>
-            )
-          })
-        }
-      </ul>
+      <div className='tripStays'>
+        <div className='tripStays1'>
+          <div>
+            {trip.hotel}
+          </div>
+          <div>
+            Checking in: {trip.checkIn}
+          </div>
+          <div>
+            Checking Out: {trip.checkOut}
+          </div>
+        </div>
+        <div className='tripStays2'>
+          {/* <StayForm tripStays={ tripStays }/> */}
+          <h4>There are {tripStays.length} Bonus Amenities</h4>
+          <ul>
+            {
+              tripStays.map(stay => {
+                return (
+                  <li key={stay.id}>
+                    {stay.amenity}
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
+      </div>  
+      <h4 className='text-center'>Edit City Info</h4>
+      <CreateTripForm trip={ trip }/>
     </div>
   )
 }

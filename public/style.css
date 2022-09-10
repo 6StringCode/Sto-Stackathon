@@ -24,6 +24,17 @@ form div {
   display: flex;
 }
 
+.tripStays {
+  display: flex;
+  flex-direction: column;
+}
+
+.tripStays1 {
+  flex: 1;
+}
+.tripStays2 {
+  flex: 1;
+}
 h4 {
   text-align: center;
 }
