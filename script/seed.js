@@ -14,6 +14,9 @@ async function seed() {
   // Creating Users
   const users = await Promise.all([
     User.create({ firstName: 'Erik', lastName: 'Birkeland', department: 'MANAGEMENT', isAdmin: 1, username: 'erik', password: 'screech' }),
+    User.create({ firstName: 'Jeffrey', lastName: 'Mensch', department: 'MANAGEMENT', isAdmin: 1, username: 'jeff', password: 'screech' }),
+    User.create({ firstName: 'Martin', lastName: 'Scorsese', department: 'MANAGEMENT' }),
+    User.create({ firstName: 'Lin-Manuel', lastName: 'Miranda', department: 'MANAGEMENT' }),
     User.create({ firstName: 'Adam', lastName: 'Stoler', department: 'MUSIC', isAdmin: 1, username: 'adam', password: 'screech' }),
     User.create({ firstName: 'Steven', lastName: 'Tyler', department: 'MUSIC' }),
     User.create({ firstName: 'Joe', lastName: 'Perry', department: 'MUSIC' }),
@@ -21,7 +24,17 @@ async function seed() {
     User.create({ firstName: 'Steve', lastName: 'Jordan', department: 'MUSIC' }),
     User.create({ firstName: 'Perry', lastName: 'Farrell', department: 'MUSIC' }),
     User.create({ firstName: 'Dave', lastName: 'Navarro', department: 'MUSIC' }),
-    User.create({ firstName: 'David Lee', lastName: 'Roth', department: 'ACTOR' }),
+    User.create({ firstName: 'David Lee', lastName: 'Roth', department: 'MUSIC' }),
+    User.create({ firstName: 'Hugh', lastName: 'Jackman', department: 'ACTOR' }),
+    User.create({ firstName: 'George', lastName: 'Clooney', department: 'ACTOR' }),
+    User.create({ firstName: 'Steve', lastName: 'Carrell', department: 'ACTOR' }),
+    User.create({ firstName: 'Bette', lastName: 'Midler', department: 'ACTOR' }),
+    User.create({ firstName: 'Barbara', lastName: 'Streisand', department: 'ACTOR' }),
+    User.create({ firstName: 'Liza', lastName: 'Minnelli', department: 'ACTOR' }),
+    User.create({ firstName: 'Lorna', lastName: 'Luft', department: 'ACTOR' }),
+    User.create({ firstName: 'Joe', lastName: 'Pie', department: 'CREW' }),
+    User.create({ firstName: 'Tim', lastName: 'Allen', department: 'CREW' }),
+    User.create({ firstName: 'Tim', lastName: '', department: 'CREW' }),
   ]);
   
   //creating trips

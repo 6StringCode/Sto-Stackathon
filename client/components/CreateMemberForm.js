@@ -63,7 +63,6 @@ class createMemberForm extends Component {
         const { save, onChange } = this;
         return (
             <div>
-                <h4 className='text-center'>Add a Company Member</h4>
                 <form onSubmit={ save }>
                     <div className="control-group">
                         <label>First Name</label>
@@ -100,7 +99,7 @@ class createMemberForm extends Component {
                                 <option value='CREW'>Crew</option>
                                 <option value='MUSIC'>Music</option>
                                 <option value='ACTOR'>Actor</option>
-                                <option value='OTHER'>Other</option>
+                                {/* <option value='OTHER'>Other</option> */}
                         </select><br />
                     </div>
                     <div className="control-group">

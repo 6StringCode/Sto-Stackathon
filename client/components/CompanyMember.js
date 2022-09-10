@@ -37,6 +37,7 @@ class CompanyMember extends Component {
           <p>Department: {user.department}</p>
         </div>
         <div>
+          <h4>Edit Company Member Info</h4>
           <CreateMemberForm user={ this.props.user }/>
         </div>
       </div>

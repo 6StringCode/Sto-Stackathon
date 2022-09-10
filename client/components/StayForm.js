@@ -17,7 +17,7 @@ class StayForm extends Component {
     const { companyHousing, amenity } = this.state;
     return (  
       <div>
-        <h4>There are {this.props.tripStays.length} Stays</h4>
+        <h4>There are {this.props.tripStays.length} Bonus Amenities</h4>
       </div>
     );
   }
